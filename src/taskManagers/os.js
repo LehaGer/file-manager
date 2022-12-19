@@ -70,7 +70,21 @@ class Os {
                 }
                 case "cpus": {
 
-                    console.log(cpus());
+                    const CPUS = cpus();
+                    const cors = CPUS.reduce((accumulator, arg) => {
+
+                        return [
+                            ...accumulator,
+                            {
+                                model: arg.model,
+                                "clock rate": `${arg.speed / 1000} GHz`
+                            }
+                        ]
+
+                    }, []);
+
+                    console.log(`overall amount of CPUS: ${CPUS.length}`);
+                    console.table(cors);
 
                     break;
 
