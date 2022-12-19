@@ -4,6 +4,19 @@ import * as path from 'node:path';
 import * as os from 'node:os';
 import { fileURLToPath } from 'node:url';
 
+const INVALID_INPUT = "Invalid input";
+const setOfAvailableInputs = [];
+
+const isInputValid = (input) => {
+
+    if(!setOfAvailableInputs.filter(availableInput => availableInput === input)) {
+
+        throw new Error(INVALID_INPUT);
+
+    }
+
+}
+
 const fileManager = async () => {
 
     try {
@@ -31,9 +44,19 @@ const fileManager = async () => {
 
             rl.pause();
 
-            if(input === '.exit') rl.close();
+            try {
 
-            console.log(`You are currently in ${__dirname}\n`);
+                isInputValid();
+
+                if(input === '.exit') rl.close();
+
+                console.log(`You are currently in ${__dirname}\n`);
+
+            } catch (error) {
+
+                console.log(error.message);
+
+            }
 
             rl.resume();
 
