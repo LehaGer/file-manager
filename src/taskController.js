@@ -1,4 +1,11 @@
-import {COMPRESS_COMMANDS, FILES_COMMANDS, HASH_COMMANDS, MWD_COMMANDS, OS_COMMANDS} from "./constantsList.js";
+import {
+    COMPRESS_COMMANDS,
+    FILES_COMMANDS,
+    HASH_COMMANDS,
+    INVALID_INPUT_ERROR_MSG,
+    MWD_COMMANDS,
+    OS_COMMANDS,
+} from "./constantsList.js";
 import Mwd from "./mwd.js";
 import File from "./file.js";
 import Os from "./os.js";
@@ -12,10 +19,11 @@ class TaskController {
         try {
 
             if (MWD_COMMANDS.filter(availableInput => input.startsWith(availableInput)).length) await Mwd.perform(input);
-            if (FILES_COMMANDS.filter(availableInput => input.startsWith(availableInput)).length) File.perform(input);
-            if (OS_COMMANDS.filter(availableInput => input.startsWith(availableInput)).length) Os.perform(input);
-            if (HASH_COMMANDS.filter(availableInput => input.startsWith(availableInput)).length) Hash.perform(input);
-            if (COMPRESS_COMMANDS.filter(availableInput => input.startsWith(availableInput)).length) Compress.perform(input);
+            else if (FILES_COMMANDS.filter(availableInput => input.startsWith(availableInput)).length) await File.perform(input);
+            else if (OS_COMMANDS.filter(availableInput => input.startsWith(availableInput)).length) await Os.perform(input);
+            else if (HASH_COMMANDS.filter(availableInput => input.startsWith(availableInput)).length) await Hash.perform(input);
+            else if (COMPRESS_COMMANDS.filter(availableInput => input.startsWith(availableInput)).length) await Compress.perform(input);
+            else throw new Error(INVALID_INPUT_ERROR_MSG);
 
         } catch (error) {
 
