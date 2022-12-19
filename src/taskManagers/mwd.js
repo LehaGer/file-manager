@@ -1,4 +1,4 @@
-import { access, constants, readdir } from 'node:fs/promises';
+import { access, constants, readdir, lstat } from 'node:fs/promises';
 import * as path from 'node:path';
 import { INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG, HOME_DIR } from '../constants.js';
 
@@ -74,7 +74,12 @@ class Mwd {
 
                 for (const file of await readdir(this.currentDirname)) {
 
-                    fileList.push(file);
+                    const stat = await lstat(path.resolve(this.currentDirname, file));
+
+                    fileList.push({
+                        Name: file,
+                        Type: (stat.isFile() ? "file" : "directory"),
+                    });
 
                 }
 
