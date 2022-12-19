@@ -1,7 +1,7 @@
 import {access, constants, readFile} from "node:fs/promises";
 import * as path from "node:path";
 import {createHash} from "node:crypto";
-import {INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG} from "./constantsList.js";
+import {INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG} from "../constants.js";
 import Mwd from "./mwd.js";
 
 class Hash {

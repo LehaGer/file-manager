@@ -1,6 +1,6 @@
 import {access, constants} from "node:fs/promises";
 import * as path from "node:path";
-import {INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG} from "./constantsList.js";
+import {INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG} from "../constants.js";
 import Mwd from "./mwd.js";
 import {createReadStream, createWriteStream} from "node:fs";
 import {createBrotliCompress, createBrotliDecompress} from "node:zlib";

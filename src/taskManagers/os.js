@@ -1,5 +1,5 @@
 import {arch, cpus, EOL, homedir, userInfo} from "node:os";
-import {INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG} from "./constantsList.js";
+import {INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG} from "../constants.js";
 
 class Os {
 

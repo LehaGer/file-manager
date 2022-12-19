@@ -1,6 +1,6 @@
 import { access, constants, readdir } from 'node:fs/promises';
 import * as path from 'node:path';
-import { INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG, HOME_DIR } from './constantsList.js';
+import { INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG, HOME_DIR } from '../constants.js';
 
 class Mwd {
 
@@ -37,7 +37,7 @@ class Mwd {
             return false;
 
         }
-        
+
     }
 
     static checkInputFormat = async (input) => {

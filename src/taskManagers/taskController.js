@@ -5,7 +5,7 @@ import {
     INVALID_INPUT_ERROR_MSG,
     MWD_COMMANDS,
     OS_COMMANDS,
-} from "./constantsList.js";
+} from "../constants.js";
 import Mwd from "./mwd.js";
 import File from "./file.js";
 import Os from "./os.js";

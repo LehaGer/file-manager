@@ -2,7 +2,7 @@ import {access, constants, open, rename as renameCommand, rm, writeFile} from "n
 import {createReadStream, createWriteStream} from "node:fs";
 import * as path from "node:path";
 import {Buffer} from "node:buffer";
-import {INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG} from "./constantsList.js";
+import {INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG} from "../constants.js";
 import Mwd from "./mwd.js";
 
 class File {
