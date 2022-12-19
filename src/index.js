@@ -1,5 +1,7 @@
 import process, { stdin as input, stdout as output } from 'node:process';
 import * as readline from 'node:readline/promises';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const fileManager = async () => {
 
@@ -10,13 +12,17 @@ const fileManager = async () => {
             ? usernameStr.split("=")[1]
             : "";
 
+        let __filename = fileURLToPath(import.meta.url);
+        let __dirname = path.dirname(__filename);
+
         const rl = readline.createInterface({ input, output });
 
         console.log(`Welcome to the File Manager, ${username}!\n`);
+        console.log(`You are currently in ${__dirname}\n`);
 
         rl.on('close', () => {
 
-            console.log(`\nThank you for using File Manager, ${username}, goodbye!`)
+            console.log(`Thank you for using File Manager, ${username}, goodbye!`)
             process.exit(0);
 
         });
@@ -24,7 +30,7 @@ const fileManager = async () => {
 
             if(input === '.exit') rl.close();
 
-            console.log(`Received: ${input}`);
+            console.log(`You are currently in ${__dirname}\n`);
 
         });
 
