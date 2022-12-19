@@ -1,6 +1,7 @@
 import process, { stdin as input, stdout as output } from 'node:process';
 import * as readline from 'node:readline/promises';
 import * as path from 'node:path';
+import * as os from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const fileManager = async () => {
@@ -13,7 +14,7 @@ const fileManager = async () => {
             : "";
 
         let __filename = fileURLToPath(import.meta.url);
-        let __dirname = path.dirname(__filename);
+        let __dirname = os.homedir();
 
         const rl = readline.createInterface({ input, output });
 
