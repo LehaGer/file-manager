@@ -1,0 +1,21 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "node-task-2",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:name": "node src/index.js --username=LehaGer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LehaGer/file-manager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LehaGer/file-manager/issues"
+  },
+  "homepage": "https://github.com/LehaGer/file-manager#readme"
+}
