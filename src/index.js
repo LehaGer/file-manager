@@ -7,8 +7,14 @@ const fileManager = async () => {
 
     try {
 
-        const usernameStr = process.argv[process.argv.length - 1];
-        const username = usernameStr.startsWith("--") ? usernameStr.split("=")[1] : "";
+        const username = process.argv.reduce((accumulator, arg) => {
+            console.log(arg);
+            if(arg.startsWith('--') && arg.slice(2, arg.search("=")) === "username") {
+                return arg.split("=")[1];
+            } else {
+                return "";
+            }
+        }, "");
 
         const WELCOME_MSG = `Welcome to the File Manager, ${username}!\n`;
         const LEAVE_MSG = `Thank you for using File Manager, ${username}, goodbye!`;
