@@ -8,7 +8,6 @@ const fileManager = async () => {
     try {
 
         const username = process.argv.reduce((accumulator, arg) => {
-            console.log(arg);
             if(arg.startsWith('--') && arg.slice(2, arg.search("=")) === "username") {
                 return arg.split("=")[1];
             } else {
