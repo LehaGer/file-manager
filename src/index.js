@@ -27,11 +27,15 @@ const fileManager = async () => {
             process.exit(0);
 
         });
-        rl.on('line', (input) => {
+        rl.on('line', async (input) => {
+
+            rl.pause();
 
             if(input === '.exit') rl.close();
 
             console.log(`You are currently in ${__dirname}\n`);
+
+            rl.resume();
 
         });
 
