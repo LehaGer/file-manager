@@ -63,7 +63,7 @@ class Os {
 
                 case "EOL": {
 
-                    console.log(EOL());
+                    console.log(EOL);
 
                     break;
 
