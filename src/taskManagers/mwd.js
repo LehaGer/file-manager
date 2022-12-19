@@ -83,6 +83,12 @@ class Mwd {
 
                 }
 
+                fileList.sort((a, b) => {
+                    if(a.Type === "directory" && b.Type === "file") {
+                        return -1
+                    }
+                })
+
                 console.table(fileList);
 
             }
