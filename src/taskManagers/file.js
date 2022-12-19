@@ -1,4 +1,4 @@
-import {access, constants, open, rename as renameCommand, rm, writeFile} from "node:fs/promises";
+import {access, constants, rename as renameCommand, rm, writeFile} from "node:fs/promises";
 import {createReadStream, createWriteStream} from "node:fs";
 import * as path from "node:path";
 import {Buffer} from "node:buffer";
@@ -193,16 +193,20 @@ class File {
                 case "cat": {
 
                     const inputArg = input.filter((val, index) => index !== 0).join(" ");
-                    const fd = await open(path.resolve(Mwd.getCurrentDir(), `${inputArg}`));
-                    const stream = fd.createReadStream();
+                    const filePath = path.resolve(Mwd.getCurrentDir(), `${inputArg}`);
+                    const readableStream = createReadStream(filePath);
 
-                    stream.on("data", (chunk) => {
+                    return new Promise(res => {
 
-                        console.log(chunk.toString());
+                        readableStream.on("data", (chunk) => {
+
+                            console.log(chunk.toString());
+
+                        });
+
+                        readableStream.on("end", res);
 
                     });
-
-                    break;
 
                 }
                 case "add": {
