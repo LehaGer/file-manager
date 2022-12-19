@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "start:name": "node src/index.js -- --username=LehaGer",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:name": "node src/index.js -- --username=LehaGer"
   },
   "repository": {
     "type": "git",

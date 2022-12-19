@@ -1,64 +1,46 @@
 import process, { stdin as input, stdout as output } from 'node:process';
 import * as readline from 'node:readline/promises';
 import * as path from 'node:path';
-import * as os from 'node:os';
 import { fileURLToPath } from 'node:url';
+import {HOME_DIR} from "./constantsList.js";
+import TaskController from "./taskController.js";
+import Mwd from "./mwd.js";
 
-const INVALID_INPUT = "Invalid input";
-const setOfAvailableInputs = [];
-
-const isInputValid = (input) => {
-
-    if(!setOfAvailableInputs.filter(availableInput => availableInput === input)) {
-
-        throw new Error(INVALID_INPUT);
-
-    }
-
-}
+let __filename = fileURLToPath(import.meta.url);
+let __dirname = HOME_DIR;
 
 const fileManager = async () => {
 
     try {
 
         const usernameStr = process.argv[process.argv.length-1];
-        const username = usernameStr.startsWith("--")
-            ? usernameStr.split("=")[1]
-            : "";
+        const username = usernameStr.startsWith("--") ? usernameStr.split("=")[1] : "";
 
-        let __filename = fileURLToPath(import.meta.url);
-        let __dirname = os.homedir();
+        const WELCOME_MSG = `Welcome to the File Manager, ${username}!\n`;
+        const LEAVE_MSG = `Thank you for using File Manager, ${username}, goodbye!`;
 
         const rl = readline.createInterface({ input, output });
 
-        console.log(`Welcome to the File Manager, ${username}!\n`);
-        console.log(`You are currently in ${__dirname}\n`);
+        console.log(WELCOME_MSG);
+        console.log(`You are currently in ${Mwd.getCurrentDir()}\n`);
 
-        rl.on('close', () => {
-
-            console.log(`Thank you for using File Manager, ${username}, goodbye!`)
-            process.exit(0);
-
-        });
         rl.on('line', async (input) => {
 
             rl.pause();
 
-            try {
+            if(input === '.exit') rl.close();
 
-                isInputValid();
+            await TaskController.perform(input);
 
-                if(input === '.exit') rl.close();
-
-                console.log(`You are currently in ${__dirname}\n`);
-
-            } catch (error) {
-
-                console.log(error.message);
-
-            }
+            console.log(`You are currently in ${Mwd.getCurrentDir()}\n`);
 
             rl.resume();
+
+        });
+        rl.on('close', () => {
+
+            console.log(LEAVE_MSG)
+            process.exit(0);
 
         });
 
