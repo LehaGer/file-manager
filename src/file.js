@@ -1,10 +1,9 @@
-import Mwd from "./mwd.js";
+import {access, constants, open, rename as renameCommand, rm, writeFile} from "node:fs/promises";
+import {createReadStream, createWriteStream} from "node:fs";
+import * as path from "node:path";
+import {Buffer} from "node:buffer";
 import {INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG} from "./constantsList.js";
-import { access, constants, readdir, open, writeFile, rename as renameCommand, rm } from 'node:fs/promises';
-import { createReadStream, createWriteStream } from 'node:fs';
-import * as path from 'node:path';
-import { Buffer } from 'node:buffer';
-
+import Mwd from "./mwd.js";
 
 class File {
 
@@ -14,11 +13,11 @@ class File {
 
             case "cat": {
 
-                if(input.length < 2) return false;
+                if (input.length < 2) return false;
 
                 try {
 
-                    const inputArg = input.filter((val, index) => index !== 0).join(' ');
+                    const inputArg = input.filter((val, index) => index !== 0).join(" ");
 
                     await access(path.resolve(Mwd.getCurrentDir(), `${inputArg}`), constants.F_OK);
 
@@ -33,7 +32,7 @@ class File {
             }
             case "add": {
 
-                if(input.length < 2) return false;
+                if (input.length < 2) return false;
 
                 try {
 
@@ -50,7 +49,7 @@ class File {
             }
             case "rn": {
 
-                if(input.length !== 3) return false;
+                if (input.length !== 3) return false;
 
                 try {
 
@@ -79,7 +78,7 @@ class File {
             }
             case "cp": {
 
-                if(input.length !== 3) return false;
+                if (input.length !== 3) return false;
 
                 try {
 
@@ -111,7 +110,7 @@ class File {
             }
             case "mv": {
 
-                if(input.length !== 3) return false;
+                if (input.length !== 3) return false;
 
                 try {
 
@@ -143,11 +142,11 @@ class File {
             }
             case "rm": {
 
-                if(input.length < 2) return false;
+                if (input.length < 2) return false;
 
                 try {
 
-                    const inputArg = input.filter((val, index) => index !== 0).join(' ');
+                    const inputArg = input.filter((val, index) => index !== 0).join(" ");
                     const pathToFile = path.resolve(Mwd.getCurrentDir(), inputArg);
 
                     await access(pathToFile, constants.F_OK);
@@ -169,17 +168,17 @@ class File {
 
         }
 
-    }
+    };
 
     static checkInputFormat = async (input) => {
 
-        if(!await this.isCorrectFormat(input)) {
+        if (!await this.isCorrectFormat(input)) {
 
             throw new Error(INVALID_INPUT_ERROR_MSG);
 
         }
 
-    }
+    };
 
     static perform = async (input) => {
 
@@ -193,7 +192,7 @@ class File {
 
                 case "cat": {
 
-                    const inputArg = input.filter((val, index) => index !== 0).join(' ');
+                    const inputArg = input.filter((val, index) => index !== 0).join(" ");
                     const fd = await open(path.resolve(Mwd.getCurrentDir(), `${inputArg}`));
                     const stream = fd.createReadStream();
 
@@ -208,7 +207,7 @@ class File {
                 }
                 case "add": {
 
-                    const inputArg = input.filter((val, index) => index !== 0).join(' ');
+                    const inputArg = input.filter((val, index) => index !== 0).join(" ");
 
                     const data = new Uint8Array(Buffer.from(""));
                     await writeFile(path.resolve(Mwd.getCurrentDir(), `${inputArg}`), data);
@@ -251,18 +250,18 @@ class File {
 
                     readableStream.pipe(writableStream);
 
-                    readableStream.on('end', async () => {
+                    readableStream.on("end", async () => {
 
                         await rm(pathToFile);
 
-                    })
+                    });
 
                     break;
 
                 }
                 case "rm": {
 
-                    const inputArg = input.filter((val, index) => index !== 0).join(' ');
+                    const inputArg = input.filter((val, index) => index !== 0).join(" ");
                     const pathToFile = path.resolve(Mwd.getCurrentDir(), inputArg);
 
                     await rm(pathToFile);
@@ -279,7 +278,7 @@ class File {
 
         }
 
-    }
+    };
 
 }
 
