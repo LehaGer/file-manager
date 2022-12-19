@@ -1,7 +1,6 @@
-import {access, constants, open, rename as renameCommand, rm, writeFile, readFile } from "node:fs/promises";
-import { createReadStream } from 'node:fs';
+import {access, constants, readFile} from "node:fs/promises";
 import * as path from "node:path";
-import { createHash } from 'node:crypto';
+import {createHash} from "node:crypto";
 import {INVALID_INPUT_ERROR_MSG, OPERATION_FAILED_ERROR_MSG} from "./constantsList.js";
 import Mwd from "./mwd.js";
 
@@ -9,7 +8,7 @@ class Hash {
 
     static isCorrectFormat = async (input) => {
 
-        if(input.length !== 2) return false;
+        if (input.length !== 2) return false;
 
         try {
 
@@ -47,11 +46,11 @@ class Hash {
             const inputArg = input.filter((val, index) => index !== 0).join(" ");
             const file = await readFile(path.resolve(Mwd.getCurrentDir(), `${inputArg}`));
 
-            const hash = createHash('sha256');
+            const hash = createHash("sha256");
 
             hash.update(file);
 
-            const hashInHexFormat = hash.digest('hex');
+            const hashInHexFormat = hash.digest("hex");
 
             console.log(hashInHexFormat);
 
